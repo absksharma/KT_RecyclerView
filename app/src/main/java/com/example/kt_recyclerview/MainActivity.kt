@@ -1,12 +1,13 @@
 package com.example.kt_recyclerview
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kt_recyclerview.adapter.MyAdapter
 import com.example.kt_recyclerview.model.Contacts
+import com.example.kt_recyclerview.ui.DetailedContact
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -66,8 +67,13 @@ class MainActivity : AppCompatActivity() {
         newRecyclerView.adapter = adapter
         adapter.setOnItemClickListener(object : MyAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-                Toast.makeText(this@MainActivity, "YOU clicked at $position", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(this@MainActivity, "YOU clicked at $position", Toast.LENGTH_SHORT)
+//                    .show()
+                val intent =  Intent(this@MainActivity,DetailedContact::class.java)
+                intent.putExtra("name",newContactsList[position].name)
+                intent.putExtra("phoneNo",newContactsList[position].phoneNo)
+                intent.putExtra("image",newContactsList[position].image)
+                startActivity(intent)
             }
         })
     }

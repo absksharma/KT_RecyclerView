@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KT_RecyclerView">
         <activity
+            android:name=".ui.DetailedContact"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
