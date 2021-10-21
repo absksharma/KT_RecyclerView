@@ -1,11 +1,13 @@
 package com.example.kt_recyclerview
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kt_recyclerview.adapter.MyAdapter
 import com.example.kt_recyclerview.model.Contacts
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var newRecyclerView: RecyclerView
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             "Jimmie Fisher",
             "Lucas Logan",
             "Ellen Aguilar",
+            "Ellen Aguilar"
         )
         phoneNo = arrayOf(
             "+1 320-769-9784",
@@ -42,7 +45,8 @@ class MainActivity : AppCompatActivity() {
             "+1 505-644-2467",
             "+1 239-711-6616",
             "+1 505-644-8922",
-            "+1 402-233-3734"
+            "+1 402-233-3734",
+            "+1 239-711-6616"
         )
 
         newRecyclerView = findViewById(R.id.rvContacts)
@@ -54,10 +58,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getUserdata() {
-        for (i in name.indices) {
+        for (i in imageId.indices) {
             val contact = Contacts(name[i], phoneNo[i], imageId[i])
             newContactsList.add(contact)
         }
-        newRecyclerView.adapter = MyAdapter(newContactsList)
+        var adapter = MyAdapter(newContactsList)
+        newRecyclerView.adapter = adapter
+        adapter.setOnItemClickListener(object : MyAdapter.onItemClickListener {
+            override fun onItemClick(position: Int) {
+                Toast.makeText(this@MainActivity, "YOU clicked at $position", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
     }
 }
